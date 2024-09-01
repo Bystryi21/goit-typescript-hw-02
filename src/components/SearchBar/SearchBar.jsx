@@ -1,4 +1,5 @@
 import { Formik, Form, Field } from "formik";
+import css from "./SearchBar.module.css";
 // import { nanoid } from "nanoid";
 
 export default function SearchBar({ onSubmit }) {
@@ -11,17 +12,20 @@ export default function SearchBar({ onSubmit }) {
   };
 
   return (
-    <header>
+    <header className={css.header}>
       <Formik onSubmit={handleSubmit} initialValues={initialValue}>
-        <Form>
+        <Form className={css.form}>
           <Field
             type="text"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
             name="value"
+            className={css.field}
           ></Field>
-          <button type="submit">Search</button>
+          <button type="submit" className={css.btn}>
+            Search
+          </button>
         </Form>
       </Formik>
     </header>

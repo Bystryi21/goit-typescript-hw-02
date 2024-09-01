@@ -8,6 +8,27 @@ import toast, { Toaster } from "react-hot-toast";
 import Modal from "react-modal";
 Modal.setAppElement("#root"); // Обов'язково для доступності
 
+const stylesForModal = {
+  overlay: {
+    overflow: "hidden",
+  },
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    padding: "20px",
+    borderRadius: "10px",
+    backgroundColor: "#fff",
+    maxWidth: "90%",
+    maxHeight: "90%",
+    overflow: "hidden",
+    objectFit: "contain",
+  },
+};
+
 function App() {
   const [photos, setPhotos] = useState([]);
   const [topic, setTopic] = useState("");
@@ -15,7 +36,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [maxPages, setMaxPages] = useState();
-  // Стани для модального вікна
+
   const [modalIsOpen, setIsOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -86,20 +107,31 @@ function App() {
       {/* {loading && <div>Loading...</div>}
       {error && <div>Error..</div>} */}
       {photos.length > 0 && !loading && (
-        <button type="button" onClick={handleLoadMore}>
+        <button type="button" onClick={handleLoadMore} className="button">
           Load More
         </button>
       )}
-      {page > maxPages && <div>No more images</div>}
-      {/* Модальне вікно */}
+      {page > maxPages && <div className="notification">No more images</div>}
+
       <Modal
+        style={stylesForModal}
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         houldCloseOnEsc={true}
         shouldCloseOnOverlayClick={true}
       >
         {/* <button onClick={closeModal}>Close</button> */}
-        {selectedImage && <img src={selectedImage} alt="Selected" />}
+        {selectedImage && (
+          <img
+            src={selectedImage}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "contain",
+            }}
+            alt="Selected"
+          />
+        )}
       </Modal>
     </>
   );
