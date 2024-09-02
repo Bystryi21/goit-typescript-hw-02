@@ -21,3 +21,11 @@
   border: 1px transparent;
   border-radius: 15px;
 }
+
+.error {
+  position: absolute;
+  top: 70px;
+  left: 400px;
+  color: #ff1a1a;
+  font-weight: 700;
+}

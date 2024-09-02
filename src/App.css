@@ -45,16 +45,6 @@ body {
   margin: 0;
 }
 
-.button {
-  display: block;
-  margin: 0 auto;
-  padding: 15px;
-  border: 1px transparent;
-  border-radius: 15px;
-  background-color: #4169e1;
-  color: aliceblue;
-}
-
 .notification {
   color: #4169e1;
   display: flex;

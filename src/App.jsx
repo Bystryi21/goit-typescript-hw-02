@@ -4,30 +4,33 @@ import SearchBar from "./components/SearchBar/SearchBar";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import { fetchedPhotos } from "./services/image-api";
 import toast, { Toaster } from "react-hot-toast";
-//
-import Modal from "react-modal";
-Modal.setAppElement("#root"); // Обов'язково для доступності
+import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 
-const stylesForModal = {
-  overlay: {
-    overflow: "hidden",
-  },
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    padding: "20px",
-    borderRadius: "10px",
-    backgroundColor: "#fff",
-    maxWidth: "90%",
-    maxHeight: "90%",
-    overflow: "hidden",
-    objectFit: "contain",
-  },
-};
+import ImageModal from "./components/ImageModal/ImageModal";
+//
+// import Modal from "react-modal";
+// Modal.setAppElement("#root"); // Обов'язково для доступності
+
+// const stylesForModal = {
+//   overlay: {
+//     overflow: "hidden",
+//   },
+//   content: {
+//     top: "50%",
+//     left: "50%",
+//     right: "auto",
+//     bottom: "auto",
+//     marginRight: "-50%",
+//     transform: "translate(-50%, -50%)",
+//     padding: "20px",
+//     borderRadius: "10px",
+//     backgroundColor: "#fff",
+//     maxWidth: "90%",
+//     maxHeight: "90%",
+//     overflow: "hidden",
+//     objectFit: "contain",
+//   },
+// };
 
 function App() {
   const [photos, setPhotos] = useState([]);
@@ -107,20 +110,17 @@ function App() {
       {/* {loading && <div>Loading...</div>}
       {error && <div>Error..</div>} */}
       {photos.length > 0 && !loading && (
-        <button type="button" onClick={handleLoadMore} className="button">
-          Load More
-        </button>
+        <LoadMoreBtn loadMore={handleLoadMore} />
       )}
       {page > maxPages && <div className="notification">No more images</div>}
 
-      <Modal
+      {/* <Modal
         style={stylesForModal}
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         houldCloseOnEsc={true}
         shouldCloseOnOverlayClick={true}
       >
-        {/* <button onClick={closeModal}>Close</button> */}
         {selectedImage && (
           <img
             src={selectedImage}
@@ -132,7 +132,14 @@ function App() {
             alt="Selected"
           />
         )}
-      </Modal>
+      </Modal> */}
+      {selectedImage && (
+        <ImageModal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          src={selectedImage}
+        />
+      )}
     </>
   );
 }
