@@ -25,7 +25,19 @@
 .error {
   position: absolute;
   top: 70px;
-  left: 400px;
+  left: 590px;
   color: #ff1a1a;
   font-weight: 700;
+}
+
+@media screen and (min-width: 1440px) {
+  .error {
+    left: 590px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .error {
+    left: 250px;
+  }
 }
