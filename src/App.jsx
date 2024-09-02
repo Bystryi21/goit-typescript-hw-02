@@ -7,30 +7,6 @@ import toast, { Toaster } from "react-hot-toast";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 
 import ImageModal from "./components/ImageModal/ImageModal";
-//
-// import Modal from "react-modal";
-// Modal.setAppElement("#root"); // Обов'язково для доступності
-
-// const stylesForModal = {
-//   overlay: {
-//     overflow: "hidden",
-//   },
-//   content: {
-//     top: "50%",
-//     left: "50%",
-//     right: "auto",
-//     bottom: "auto",
-//     marginRight: "-50%",
-//     transform: "translate(-50%, -50%)",
-//     padding: "20px",
-//     borderRadius: "10px",
-//     backgroundColor: "#fff",
-//     maxWidth: "90%",
-//     maxHeight: "90%",
-//     overflow: "hidden",
-//     objectFit: "contain",
-//   },
-// };
 
 function App() {
   const [photos, setPhotos] = useState([]);
@@ -80,7 +56,6 @@ function App() {
     setPage(page + 1);
   };
 
-  // Функції для керування модальним вікном
   const openModal = (imageUrl) => {
     setSelectedImage(imageUrl);
     setIsOpen(true);
@@ -107,32 +82,11 @@ function App() {
       {photos.length > 0 && (
         <ImageGallery photos={photos} onImageClick={openModal} />
       )}
-      {/* {loading && <div>Loading...</div>}
-      {error && <div>Error..</div>} */}
       {photos.length > 0 && !loading && (
         <LoadMoreBtn loadMore={handleLoadMore} />
       )}
       {page > maxPages && <div className="notification">No more images</div>}
 
-      {/* <Modal
-        style={stylesForModal}
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        houldCloseOnEsc={true}
-        shouldCloseOnOverlayClick={true}
-      >
-        {selectedImage && (
-          <img
-            src={selectedImage}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "contain",
-            }}
-            alt="Selected"
-          />
-        )}
-      </Modal> */}
       {selectedImage && (
         <ImageModal
           isOpen={modalIsOpen}
