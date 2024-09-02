@@ -14,6 +14,7 @@
   border: 1px transparent;
   border-radius: 15px;
   margin-right: 5px;
+  position: relative;
 }
 
 .btn {
@@ -28,16 +29,4 @@
   left: 590px;
   color: #ff1a1a;
   font-weight: 700;
-}
-
-@media screen and (min-width: 1440px) {
-  .error {
-    left: 590px;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .error {
-    left: 250px;
-  }
 }
