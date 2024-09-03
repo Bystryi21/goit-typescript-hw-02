@@ -5,6 +5,8 @@ import ImageGallery from "./components/ImageGallery/ImageGallery";
 import { fetchedPhotos } from "./services/image-api";
 import toast, { Toaster } from "react-hot-toast";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
+import Loader from "./components/Loader/Loader";
+import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 
 import ImageModal from "./components/ImageModal/ImageModal";
 
@@ -28,7 +30,7 @@ function App() {
       try {
         setLoading(true);
         setError(false);
-        toast.loading("🔄Loading your images", { duration: 1500 });
+        // toast.loading("🔄Loading your images", { duration: 1500 });
         const res = await fetchedPhotos(topic, page);
         setPhotos((prevImage) => [...prevImage, ...res.images]);
         setMaxPages(res.totalPages);
@@ -82,9 +84,13 @@ function App() {
       {photos.length > 0 && (
         <ImageGallery photos={photos} onImageClick={openModal} />
       )}
+
+      {loading && <Loader />}
+
       {photos.length > 0 && !loading && (
         <LoadMoreBtn loadMore={handleLoadMore} />
       )}
+
       {page > maxPages && <div className="notification">No more images</div>}
 
       {selectedImage && (
@@ -94,6 +100,7 @@ function App() {
           src={selectedImage}
         />
       )}
+      {error && <ErrorMessage />}
     </>
   );
 }
