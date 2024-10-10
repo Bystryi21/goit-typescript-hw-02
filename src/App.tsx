@@ -7,33 +7,36 @@ import toast, { Toaster } from "react-hot-toast";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import Loader from "./components/Loader/Loader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
+import { InterfaceImage } from "./types";
 
 import ImageModal from "./components/ImageModal/ImageModal";
 
 function App() {
-  const [photos, setPhotos] = useState([]);
-  const [topic, setTopic] = useState("");
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [maxPages, setMaxPages] = useState();
+  const [photos, setPhotos] = useState<InterfaceImage[]>([]);
+  const [topic, setTopic] = useState<string>("");
+  const [page, setPage] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [maxPages, setMaxPages] = useState<number>(0);
 
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = useState<InterfaceImage | null>(
+    null
+  );
 
   useEffect(() => {
     if (topic === "") {
       return;
     }
 
-    async function getPhoto() {
+    async function getPhoto(): Promise<void> {
       try {
         setLoading(true);
         setError(false);
-        // toast.loading("🔄Loading your images", { duration: 1500 });
         const res = await fetchedPhotos(topic, page);
         setPhotos((prevImage) => [...prevImage, ...res.images]);
         setMaxPages(res.totalPages);
+
         if (page > 1) {
           smoothScroll();
         }
@@ -48,7 +51,7 @@ function App() {
     getPhoto();
   }, [topic, page]);
 
-  const handleSearch = (newTopic) => {
+  const handleSearch = (newTopic: string): void => {
     setPhotos([]);
     setTopic(newTopic);
     setPage(1);
@@ -58,12 +61,12 @@ function App() {
     setPage(page + 1);
   };
 
-  const openModal = (imageUrl) => {
+  const openModal = (imageUrl: InterfaceImage): void => {
     setSelectedImage(imageUrl);
     setIsOpen(true);
   };
 
-  const closeModal = () => {
+  const closeModal = (): void => {
     setIsOpen(false);
     setSelectedImage(null);
   };
@@ -91,7 +94,9 @@ function App() {
         <LoadMoreBtn loadMore={handleLoadMore} />
       )}
 
-      {page > maxPages && <div className="notification">No more images</div>}
+      {page > maxPages && !loading && (
+        <div className="notification">No more images</div>
+      )}
 
       {selectedImage && (
         <ImageModal

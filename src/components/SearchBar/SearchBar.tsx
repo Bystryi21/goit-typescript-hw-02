@@ -5,7 +5,7 @@ import * as Yup from "yup";
 export default function SearchBar({ onSubmit }) {
   const FeedbackSchema = Yup.object().shape({
     value: Yup.string()
-      .matches(/^[A-z]+$/, "Name must only contain letters")
+      .matches(/^[A-z]+$/, "Must contain only letters")
       .min(3, "Too Short!")
       .max(50, "Too Long!")
       .required("Required"),
