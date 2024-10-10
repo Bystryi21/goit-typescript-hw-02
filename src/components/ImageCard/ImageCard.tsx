@@ -1,6 +1,16 @@
 import css from "./ImageCard.module.css";
 
-export default function ImageCard({ photos, alt_description, click }) {
+interface ImageCardInterface {
+  photos: string;
+  alt_description: string;
+  click: () => void;
+}
+
+export default function ImageCard({
+  photos,
+  alt_description,
+  click,
+}: ImageCardInterface) {
   return (
     <>
       <div>

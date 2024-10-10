@@ -5,7 +5,7 @@ import React, { FC } from "react";
 
 interface InterfaceImageGallery {
   photos: InterfaceImage[];
-  onImageClick: (imageUrl: InterfaceImage) => void;
+  onImageClick: (imageUrl: string) => void;
 }
 
 export default function ImageGallery({

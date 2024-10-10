@@ -18,17 +18,27 @@ const stylesForModal = {
     maxWidth: "90%",
     maxHeight: "90%",
     overflow: "hidden",
-    objectFit: "contain",
+    // objectFit: "contain",
   },
 };
 
-export default function ImageModal({ isOpen, onRequestClose, src }) {
+interface ImageModalInterface {
+  isOpen: boolean;
+  onRequestClose: () => void;
+  src: string;
+}
+
+export default function ImageModal({
+  isOpen,
+  onRequestClose,
+  src,
+}: ImageModalInterface) {
   return (
     <Modal
       style={stylesForModal}
       isOpen={isOpen}
       onRequestClose={onRequestClose}
-      houldCloseOnEsc={true}
+      shouldCloseOnEsc={true}
       shouldCloseOnOverlayClick={true}
     >
       {/* {selectedImage && ( */}
@@ -41,7 +51,7 @@ export default function ImageModal({ isOpen, onRequestClose, src }) {
         }}
         alt="Selected"
       />
-      ){/* } */}
+      {/* } */}
     </Modal>
   );
 }

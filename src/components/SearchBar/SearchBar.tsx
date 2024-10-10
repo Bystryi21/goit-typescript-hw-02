@@ -1,8 +1,16 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import css from "./SearchBar.module.css";
 import * as Yup from "yup";
 
-export default function SearchBar({ onSubmit }) {
+interface SearchBarInterface {
+  onSubmit: (newTopic: string) => void;
+}
+
+interface FormValues {
+  value: string;
+}
+
+export default function SearchBar({ onSubmit }: SearchBarInterface) {
   const FeedbackSchema = Yup.object().shape({
     value: Yup.string()
       .matches(/^[A-z]+$/, "Must contain only letters")
@@ -10,10 +18,15 @@ export default function SearchBar({ onSubmit }) {
       .max(50, "Too Long!")
       .required("Required"),
   });
-  const initialValue = {
+
+  const initialValue: FormValues = {
     value: "",
   };
-  const handleSubmit = (values, actions) => {
+
+  const handleSubmit = (
+    values: FormValues,
+    actions: FormikHelpers<FormValues>
+  ) => {
     onSubmit(values.value);
     actions.resetForm();
   };

@@ -10,6 +10,7 @@ import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import { InterfaceImage } from "./types";
 
 import ImageModal from "./components/ImageModal/ImageModal";
+// import { string } from "yup";
 
 function App() {
   const [photos, setPhotos] = useState<InterfaceImage[]>([]);
@@ -20,9 +21,7 @@ function App() {
   const [maxPages, setMaxPages] = useState<number>(0);
 
   const [modalIsOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedImage, setSelectedImage] = useState<InterfaceImage | null>(
-    null
-  );
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
     if (topic === "") {
@@ -61,7 +60,7 @@ function App() {
     setPage(page + 1);
   };
 
-  const openModal = (imageUrl: InterfaceImage): void => {
+  const openModal = (imageUrl: string): void => {
     setSelectedImage(imageUrl);
     setIsOpen(true);
   };
